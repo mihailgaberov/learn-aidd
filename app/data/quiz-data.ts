@@ -16,6 +16,787 @@ export interface QuizModule {
 
 export const quizModules: QuizModule[] = [
   {
+    id: "javascript",
+    title: "JavaScript Best Practices",
+    description: "Learn JavaScript/TypeScript best practices and coding principles",
+    explainer: `JavaScript/TypeScript is a powerful language that requires discipline to write high-quality software. This module covers key principles like DOT (Do One Thing), YAGNI (You Aren't Gonna Need It), KISS (Keep It Simple, Stupid), DRY (Don't Repeat Yourself), and SDA (Self Describing APIs).
+
+Key principles include:
+- Favor functional programming with pure, composable functions
+- Use immutability with const, spread, and rest operators
+- Prefer map, filter, reduce over manual loops
+- Keep functions short and focused on one job
+- Use concise syntax: arrow functions, destructuring, template literals
+- Avoid classes and inheritance in favor of composition
+- Use strict equality (===)
+- Prefer async/await over promise chains
+
+Naming conventions emphasize active voice, clear verbs for functions, and yes/no questions for predicates.`,
+    questions: [
+      {
+        id: "js-1",
+        question: "Which principle emphasizes that functions should do one thing well?",
+        options: ["YAGNI", "DOT", "DRY", "KISS"],
+        correctAnswer: 1,
+        explanation: "DOT stands for 'Do One Thing' - functions should have a single, clear responsibility."
+      },
+      {
+        id: "js-2",
+        question: "What should you prefer over manual loops?",
+        options: ["for loops", "while loops", "map, filter, reduce", "forEach only"],
+        correctAnswer: 2,
+        explanation: "Functional programming approaches like map, filter, and reduce are preferred over manual loops for better readability and immutability."
+      },
+      {
+        id: "js-3",
+        question: "Which is the preferred way to handle defaults in function parameters?",
+        options: ["Using || operator", "Using parameter defaults", "Using if statements", "Using ternary operators"],
+        correctAnswer: 1,
+        explanation: "Parameter defaults in function signatures are preferred over using || operator, as they provide better type inference and clearer intent."
+      },
+      {
+        id: "js-4",
+        question: "What should boolean variables be named like?",
+        options: ["Nouns", "Yes/no questions", "Verbs", "Adjectives"],
+        correctAnswer: 1,
+        explanation: "Booleans should read like yes/no questions, e.g., isActive, hasPermission, isEmpty."
+      },
+      {
+        id: "js-5",
+        question: "Which equality operator should you always use?",
+        options: ["==", "===", "=", "!="],
+        correctAnswer: 1,
+        explanation: "Always use strict equality (===) to avoid type coercion issues."
+      },
+      {
+        id: "js-6",
+        question: "What should you favor over classes and inheritance?",
+        options: ["Mixins", "Composition", "Prototypes", "Interfaces"],
+        correctAnswer: 1,
+        explanation: "Prefer composition of functions and data structures over inheritance and classes."
+      },
+      {
+        id: "js-7",
+        question: "What does SDA stand for?",
+        options: ["Simple Data Access", "Self Describing APIs", "Structured Data Architecture", "Single Data Access"],
+        correctAnswer: 1,
+        explanation: "SDA stands for Self Describing APIs - parameter values should be explicitly named in function signatures."
+      },
+      {
+        id: "js-8",
+        question: "Which is preferred for async operations?",
+        options: ["Promise chains", "async/await", "Callbacks", "Event emitters"],
+        correctAnswer: 1,
+        explanation: "Prefer async/await or asyncPipe over raw promise chains for better readability."
+      },
+      {
+        id: "js-9",
+        question: "What should function names be?",
+        options: ["Nouns", "Verbs", "Adjectives", "Any of the above"],
+        correctAnswer: 1,
+        explanation: "Functions should be verbs, e.g., increment(), filter(), createUser()."
+      },
+      {
+        id: "js-10",
+        question: "What should you use instead of mutation?",
+        options: ["const, spread, rest operators", "let and var", "Object.assign", "Direct assignment"],
+        correctAnswer: 0,
+        explanation: "Prefer immutability using const, spread, and rest operators instead of mutation."
+      },
+      {
+        id: "js-11",
+        question: "What does YAGNI stand for?",
+        options: ["You Always Get New Ideas", "You Aren't Gonna Need It", "Your App Gets New Items", "You Always Get Nice Interfaces"],
+        correctAnswer: 1,
+        explanation: "YAGNI means 'You Aren't Gonna Need It' - don't add functionality until it's actually needed."
+      },
+      {
+        id: "js-12",
+        question: "How should you handle null/undefined arguments?",
+        options: ["Use them directly", "Use options objects", "Use default parameters only", "Throw errors"],
+        correctAnswer: 1,
+        explanation: "Avoid null/undefined arguments; use options objects instead for better clarity and type safety."
+      },
+      {
+        id: "js-13",
+        question: "What should you avoid when writing functions?",
+        options: ["Pure functions", "Short functions", "Loose procedural sequences", "Composable functions"],
+        correctAnswer: 2,
+        explanation: "Avoid loose procedural sequences; compose clear pipelines instead."
+      },
+      {
+        id: "js-14",
+        question: "What is the preferred way to extract object properties?",
+        options: ["const a = obj.a;", "const { a } = obj;", "obj['a']", "obj.get('a')"],
+        correctAnswer: 1,
+        explanation: "Use object destructuring: const { a } = obj; instead of verbose property assignments."
+      },
+      {
+        id: "js-15",
+        question: "What should you use for function composition?",
+        options: ["Classes", "Inheritance", "Partial application and point-free style", "Mixins"],
+        correctAnswer: 2,
+        explanation: "Prefer composition with partial application and point-free style for cleaner, more functional code."
+      }
+    ]
+  },
+  {
+    id: "aidd",
+    title: "AIDD Framework",
+    description: "Learn about AI-Assisted Development and the AIDD framework",
+    explainer: `AIDD (AI-Assisted Development) is a framework for building software with AI agents. This project uses structured guidance in the ai/ directory to coordinate agent actions.
+
+Key concepts:
+- Agents examine the ai/* directory listings to understand available commands, rules, and workflows
+- Each folder contains index.md files that describe purpose and contents
+- Progressive discovery: only consume what you need for the current task
+- Vision document serves as source of truth for project goals and constraints
+- Conflict resolution: if tasks conflict with vision, stop and clarify
+
+The framework emphasizes:
+- Structured agent coordination
+- Clear separation of concerns
+- Progressive information consumption
+- Vision-driven development
+- Conflict detection and resolution`,
+    questions: [
+      {
+        id: "aidd-1",
+        question: "What does AIDD stand for?",
+        options: ["AI Integrated Development", "AI-Assisted Development", "Advanced Integrated Development", "Automated Integrated Development"],
+        correctAnswer: 1,
+        explanation: "AIDD stands for AI-Assisted Development - a framework for building software with AI agents."
+      },
+      {
+        id: "aidd-2",
+        question: "Where are agent guidelines stored in this project?",
+        options: ["/src/agents", "/ai directory", "/config/agents", "/docs/agents"],
+        correctAnswer: 1,
+        explanation: "Agent guidelines are stored in the ai/ directory with structured guidance for commands, rules, and workflows."
+      },
+      {
+        id: "aidd-3",
+        question: "What is the purpose of index.md files in the ai/ directory?",
+        options: ["To store code", "To describe purpose and contents of folders", "To run tests", "To deploy applications"],
+        correctAnswer: 1,
+        explanation: "Each folder contains an index.md file that describes the purpose and contents of that folder."
+      },
+      {
+        id: "aidd-4",
+        question: "What principle should agents follow when consuming information?",
+        options: ["Read everything", "Progressive discovery", "Skip documentation", "Read only code"],
+        correctAnswer: 1,
+        explanation: "Agents should use progressive discovery - only consume what they need for the current task."
+      },
+      {
+        id: "aidd-5",
+        question: "What serves as the source of truth for project goals?",
+        options: ["README.md", "package.json", "vision.md", "AGENTS.md"],
+        correctAnswer: 2,
+        explanation: "The vision document (vision.md) serves as the source of truth for project goals, constraints, and architectural decisions."
+      },
+      {
+        id: "aidd-6",
+        question: "What should agents do if a task conflicts with the vision document?",
+        options: ["Proceed anyway", "Stop and clarify", "Ignore the conflict", "Modify the vision"],
+        correctAnswer: 1,
+        explanation: "If conflicts are detected, agents must stop, identify the conflict, and ask for clarification before proceeding."
+      },
+      {
+        id: "aidd-7",
+        question: "How should agents approach reading subfolders?",
+        options: ["Read all subfolders", "Only when task requires it", "Never read subfolders", "Read randomly"],
+        correctAnswer: 1,
+        explanation: "Agents should only drill into subfolders when the task requires that specific domain knowledge."
+      },
+      {
+        id: "aidd-8",
+        question: "What is the main benefit of progressive discovery?",
+        options: ["Faster execution", "Minimizes context consumption", "More accurate results", "Better error handling"],
+        correctAnswer: 1,
+        explanation: "Progressive discovery minimizes context consumption and keeps agent responses focused."
+      },
+      {
+        id: "aidd-9",
+        question: "What should agents examine to understand available commands?",
+        options: ["Only code files", "ai/* directory listings", "node_modules", "package.json"],
+        correctAnswer: 1,
+        explanation: "Agents should examine the ai/* directory listings to understand available commands, rules, and workflows."
+      },
+      {
+        id: "aidd-10",
+        question: "What is the purpose of the agent orchestrator?",
+        options: ["To run tests", "To coordinate agent actions", "To deploy code", "To write documentation"],
+        correctAnswer: 1,
+        explanation: "The agent orchestrator coordinates the actions of other agents using structured guidance."
+      },
+      {
+        id: "aidd-11",
+        question: "When should agents read the vision document?",
+        options: ["After completing tasks", "Before creating or running any task", "Never", "Only on errors"],
+        correctAnswer: 1,
+        explanation: "Before creating or running any task, agents must first read the vision document."
+      },
+      {
+        id: "aidd-12",
+        question: "What should index.md files in ai/ directory NOT be?",
+        options: ["Auto-generated", "Manually created or edited", "Descriptive", "Helpful"],
+        correctAnswer: 1,
+        explanation: "The ai/**/index.md files are auto-generated from frontmatter and should not be created or edited manually."
+      },
+      {
+        id: "aidd-13",
+        question: "What does the vision document NOT cover?",
+        options: ["Project goals", "Architectural decisions", "User experience principles", "Specific code implementations"],
+        correctAnswer: 3,
+        explanation: "The vision document covers goals, constraints, architecture, and UX principles, but not specific code implementations."
+      },
+      {
+        id: "aidd-14",
+        question: "What is the recommended approach for Python projects?",
+        options: ["Read JavaScript folders", "Skip JavaScript-specific folders", "Read everything", "Read nothing"],
+        correctAnswer: 1,
+        explanation: "For Python projects, there's no need to read JavaScript-specific folders - only consume what's relevant."
+      },
+      {
+        id: "aidd-15",
+        question: "What happens if agents proceed with conflicting tasks?",
+        options: ["Nothing", "They should never do this", "Tasks complete successfully", "Automatic fixes apply"],
+        correctAnswer: 1,
+        explanation: "Agents should never proceed with a task that contradicts the vision without explicit user approval."
+      }
+    ]
+  },
+  {
+    id: "sudolang",
+    title: "SudoLang",
+    description: "Learn about SudoLang programming language",
+    explainer: `SudoLang is a structured natural language programming syntax designed for AI agents. It provides a way to express programming concepts, data structures, and logic in a human-readable format that AI can understand and execute.
+
+Key features:
+- Structured syntax similar to programming languages
+- Human-readable and AI-interpretable
+- Supports functions, data structures, constraints, and logic
+- Used for defining rules, workflows, and agent behaviors
+- Enables clear communication between humans and AI systems
+
+SudoLang syntax includes:
+- Function definitions with parameters
+- Data structures and types
+- Constraints and rules
+- Conditional logic
+- Iteration and control flow
+- Comments and documentation`,
+    questions: [
+      {
+        id: "sudo-1",
+        question: "What is SudoLang?",
+        options: ["A compiled language", "A structured natural language programming syntax", "A database query language", "A markup language"],
+        correctAnswer: 1,
+        explanation: "SudoLang is a structured natural language programming syntax designed for AI agents."
+      },
+      {
+        id: "sudo-2",
+        question: "Who is SudoLang primarily designed for?",
+        options: ["Web browsers", "AI agents", "Mobile apps", "Desktop applications"],
+        correctAnswer: 1,
+        explanation: "SudoLang is designed for AI agents to understand and execute programming concepts."
+      },
+      {
+        id: "sudo-3",
+        question: "What is a key feature of SudoLang syntax?",
+        options: ["Binary compilation", "Human-readable format", "Low-level memory access", "Hardware control"],
+        correctAnswer: 1,
+        explanation: "SudoLang is human-readable and AI-interpretable, making it easy for both humans and AI to understand."
+      },
+      {
+        id: "sudo-4",
+        question: "What can SudoLang express?",
+        options: ["Only functions", "Only data structures", "Functions, data structures, constraints, and logic", "Only constraints"],
+        correctAnswer: 2,
+        explanation: "SudoLang supports functions, data structures, constraints, and logic."
+      },
+      {
+        id: "sudo-5",
+        question: "What is SudoLang commonly used for in this project?",
+        options: ["Writing tests", "Defining rules, workflows, and agent behaviors", "Database queries", "API endpoints"],
+        correctAnswer: 1,
+        explanation: "SudoLang is used for defining rules, workflows, and agent behaviors in AI-assisted development."
+      },
+      {
+        id: "sudo-6",
+        question: "What does SudoLang syntax NOT include?",
+        options: ["Function definitions", "Data structures", "Binary code", "Constraints and rules"],
+        correctAnswer: 2,
+        explanation: "SudoLang is a high-level syntax and does not include binary code."
+      },
+      {
+        id: "sudo-7",
+        question: "What is the main advantage of SudoLang?",
+        options: ["Fast execution", "Clear communication between humans and AI", "Small file size", "Low memory usage"],
+        correctAnswer: 1,
+        explanation: "SudoLang enables clear communication between humans and AI systems."
+      },
+      {
+        id: "sudo-8",
+        question: "Can SudoLang express conditional logic?",
+        options: ["No", "Yes", "Only simple conditions", "Only complex conditions"],
+        correctAnswer: 1,
+        explanation: "SudoLang supports conditional logic along with other programming constructs."
+      },
+      {
+        id: "sudo-9",
+        question: "What type of language structure does SudoLang have?",
+        options: ["Unstructured", "Structured", "Object-oriented only", "Functional only"],
+        correctAnswer: 1,
+        explanation: "SudoLang has a structured syntax similar to programming languages."
+      },
+      {
+        id: "sudo-10",
+        question: "Where might you see SudoLang in this project?",
+        options: ["In compiled code", "In rule and guide files", "In package.json", "In CSS files"],
+        correctAnswer: 1,
+        explanation: "SudoLang appears in rule and guide files (like .mdc files) that define agent behaviors."
+      },
+      {
+        id: "sudo-11",
+        question: "What makes SudoLang different from traditional programming languages?",
+        options: ["It's compiled", "It's designed for AI interpretation", "It requires a runtime", "It's typed"],
+        correctAnswer: 1,
+        explanation: "SudoLang is specifically designed to be interpreted by AI agents, not compiled to machine code."
+      },
+      {
+        id: "sudo-12",
+        question: "Can SudoLang support iteration and control flow?",
+        options: ["No", "Yes", "Only loops", "Only conditionals"],
+        correctAnswer: 1,
+        explanation: "SudoLang supports iteration and control flow along with other programming constructs."
+      },
+      {
+        id: "sudo-13",
+        question: "What is the primary use case for SudoLang in AI development?",
+        options: ["Performance optimization", "Expressing agent instructions and rules", "Database management", "Network protocols"],
+        correctAnswer: 1,
+        explanation: "SudoLang is primarily used for expressing agent instructions, rules, and workflows."
+      },
+      {
+        id: "sudo-14",
+        question: "Is SudoLang suitable for writing production application code?",
+        options: ["Yes, always", "No, it's for AI instructions", "Only for frontend", "Only for backend"],
+        correctAnswer: 1,
+        explanation: "SudoLang is designed for AI instructions and rules, not for writing production application code."
+      },
+      {
+        id: "sudo-15",
+        question: "What format are SudoLang files typically saved in this project?",
+        options: [".js", ".ts", ".mdc", ".json"],
+        correctAnswer: 2,
+        explanation: "SudoLang content is typically saved in .mdc (markdown) files that contain structured instructions."
+      }
+    ]
+  },
+  {
+    id: "react",
+    title: "React",
+    description: "Learn React best practices and patterns",
+    explainer: `React is a JavaScript library for building user interfaces. This module covers React best practices and patterns used in this project.
+
+Key concepts:
+- Functional components over class components
+- Hooks for state and side effects
+- Container/presentation pattern for persisted state
+- Containers should never contain direct UI markup
+- Containers should use react-redux connect to wire actions and selectors
+- Separation of concerns: state management, UI, and side-effects in different modules
+- Use functional programming approaches
+- Favor pure functions and immutability
+
+Best practices:
+- Keep components focused and reusable
+- Use composition over inheritance
+- Extract logic into custom hooks
+- Optimize with React.memo when needed
+- Use proper key props for lists
+- Handle loading and error states`,
+    questions: [
+      {
+        id: "react-1",
+        question: "What should you use instead of class components?",
+        options: ["Mixins", "Functional components", "Prototypes", "Interfaces"],
+        correctAnswer: 1,
+        explanation: "Functional components are preferred over class components in modern React."
+      },
+      {
+        id: "react-2",
+        question: "What pattern should you use when you need persisted state?",
+        options: ["HOC pattern", "Container/presentation pattern", "Singleton pattern", "Factory pattern"],
+        correctAnswer: 1,
+        explanation: "Always use the container/presentation pattern when you need persisted state."
+      },
+      {
+        id: "react-3",
+        question: "What should containers NEVER contain?",
+        options: ["State", "Direct UI markup", "Actions", "Selectors"],
+        correctAnswer: 1,
+        explanation: "Containers should never contain any direct UI markup - they should import and use presentation components."
+      },
+      {
+        id: "react-4",
+        question: "How should containers wire actions and selectors?",
+        options: ["Directly in JSX", "Using react-redux connect", "Using useState", "Using useEffect"],
+        correctAnswer: 1,
+        explanation: "Containers should use react-redux connect to wire actions and selectors to presentation components."
+      },
+      {
+        id: "react-5",
+        question: "Should containers contain business logic?",
+        options: ["Yes, always", "No, never", "Sometimes", "Only for simple logic"],
+        correctAnswer: 1,
+        explanation: "Containers should NEVER contain business logic. Use react-redux connect instead."
+      },
+      {
+        id: "react-6",
+        question: "What should be separated into different modules?",
+        options: ["Only state and UI", "State management, UI, and side-effects", "Only UI and side-effects", "Nothing needs separation"],
+        correctAnswer: 1,
+        explanation: "Always separate state management, UI, and side-effects from each other in different modules."
+      },
+      {
+        id: "react-7",
+        question: "What should you use for state and side effects in functional components?",
+        options: ["Classes", "Hooks", "Mixins", "Prototypes"],
+        correctAnswer: 1,
+        explanation: "Use hooks for state and side effects in functional components."
+      },
+      {
+        id: "react-8",
+        question: "What should you favor in React components?",
+        options: ["Mutation", "Immutability", "Direct DOM manipulation", "Global variables"],
+        correctAnswer: 1,
+        explanation: "Favor immutability and pure functions in React components."
+      },
+      {
+        id: "react-9",
+        question: "What should you use for optimizing component renders?",
+        options: ["useState", "React.memo", "useEffect", "useCallback only"],
+        correctAnswer: 1,
+        explanation: "Use React.memo to optimize component renders when needed."
+      },
+      {
+        id: "react-10",
+        question: "What is important when rendering lists?",
+        options: ["Using index as key", "Using proper key props", "Not using keys", "Using random keys"],
+        correctAnswer: 1,
+        explanation: "Always use proper key props for lists to help React efficiently update the DOM."
+      },
+      {
+        id: "react-11",
+        question: "What should you extract complex logic into?",
+        options: ["Classes", "Custom hooks", "Global functions", "Inline functions"],
+        correctAnswer: 1,
+        explanation: "Extract complex logic into custom hooks for reusability and separation of concerns."
+      },
+      {
+        id: "react-12",
+        question: "What should you use for composition?",
+        options: ["Inheritance", "Composition", "Mixins", "Prototypes"],
+        correctAnswer: 1,
+        explanation: "Use composition over inheritance in React components."
+      },
+      {
+        id: "react-13",
+        question: "What should components be?",
+        options: ["Large and complex", "Focused and reusable", "Tightly coupled", "Stateful only"],
+        correctAnswer: 1,
+        explanation: "Keep components focused and reusable for better maintainability."
+      },
+      {
+        id: "react-14",
+        question: "What should you handle in components?",
+        options: ["Only success states", "Loading and error states", "Only loading states", "Nothing special"],
+        correctAnswer: 1,
+        explanation: "Always handle loading and error states properly in components."
+      },
+      {
+        id: "react-15",
+        question: "What programming approach should you favor in React?",
+        options: ["Object-oriented", "Functional programming", "Procedural", "Imperative"],
+        correctAnswer: 1,
+        explanation: "Favor functional programming approaches with pure functions and immutability."
+      }
+    ]
+  },
+  {
+    id: "nextjs",
+    title: "Next.js",
+    description: "Learn Next.js framework and App Router",
+    explainer: `Next.js is a React framework for production that provides server-side rendering, static site generation, and other powerful features.
+
+Key features:
+- App Router for file-based routing
+- Server Components and Client Components
+- Built-in optimization (images, fonts, etc.)
+- API routes for backend functionality
+- Automatic code splitting
+- Optimized production builds
+
+This project uses:
+- Next.js 16 with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Server and Client Components appropriately
+- File-based routing in the app/ directory
+
+Best practices:
+- Use Server Components by default
+- Mark Client Components with 'use client'
+- Leverage Next.js Image component for optimization
+- Use proper metadata for SEO
+- Organize routes in the app directory`,
+    questions: [
+      {
+        id: "next-1",
+        question: "What is Next.js?",
+        options: ["A database", "A React framework for production", "A CSS framework", "A testing library"],
+        correctAnswer: 1,
+        explanation: "Next.js is a React framework for production with server-side rendering and other features."
+      },
+      {
+        id: "next-2",
+        question: "What routing system does this project use?",
+        options: ["React Router", "App Router", "Hash routing", "Manual routing"],
+        correctAnswer: 1,
+        explanation: "This project uses Next.js App Router for file-based routing."
+      },
+      {
+        id: "next-3",
+        question: "Where are routes defined in the App Router?",
+        options: ["In a config file", "In the app/ directory", "In pages/ directory", "In components/"],
+        correctAnswer: 1,
+        explanation: "Routes are defined in the app/ directory using the file-based routing system."
+      },
+      {
+        id: "next-4",
+        question: "What should you use by default for components?",
+        options: ["Client Components", "Server Components", "Both equally", "Class components"],
+        correctAnswer: 1,
+        explanation: "Use Server Components by default in Next.js App Router."
+      },
+      {
+        id: "next-5",
+        question: "How do you mark a component as a Client Component?",
+        options: ["'use server' directive", "'use client' directive", "export default", "Using useState"],
+        correctAnswer: 1,
+        explanation: "Mark Client Components with the 'use client' directive at the top of the file."
+      },
+      {
+        id: "next-6",
+        question: "What component should you use for images?",
+        options: ["<img>", "Next.js Image component", "<picture>", "CSS background"],
+        correctAnswer: 1,
+        explanation: "Use the Next.js Image component for automatic optimization."
+      },
+      {
+        id: "next-7",
+        question: "What does Next.js provide for backend functionality?",
+        options: ["Only frontend", "API routes", "Database connections only", "File system only"],
+        correctAnswer: 1,
+        explanation: "Next.js provides API routes for backend functionality."
+      },
+      {
+        id: "next-8",
+        question: "What feature does Next.js provide automatically?",
+        options: ["Database setup", "Code splitting", "Email sending", "Payment processing"],
+        correctAnswer: 1,
+        explanation: "Next.js provides automatic code splitting for optimal performance."
+      },
+      {
+        id: "next-9",
+        question: "What should you use for SEO?",
+        options: ["Only titles", "Proper metadata", "Only descriptions", "Nothing special"],
+        correctAnswer: 1,
+        explanation: "Use proper metadata exports for SEO in Next.js."
+      },
+      {
+        id: "next-10",
+        question: "What version of Next.js does this project use?",
+        options: ["Next.js 14", "Next.js 15", "Next.js 16", "Next.js 13"],
+        correctAnswer: 2,
+        explanation: "This project uses Next.js 16.1.3."
+      },
+      {
+        id: "next-11",
+        question: "What does Next.js optimize automatically?",
+        options: ["Only images", "Images, fonts, and more", "Only fonts", "Nothing"],
+        correctAnswer: 1,
+        explanation: "Next.js provides built-in optimization for images, fonts, and other assets."
+      },
+      {
+        id: "next-12",
+        question: "What type of rendering does Next.js support?",
+        options: ["Only client-side", "Server-side rendering and static site generation", "Only static", "Only server-side"],
+        correctAnswer: 1,
+        explanation: "Next.js supports both server-side rendering (SSR) and static site generation (SSG)."
+      },
+      {
+        id: "next-13",
+        question: "Where should you organize routes?",
+        options: ["In components/", "In the app directory", "In pages/", "In lib/"],
+        correctAnswer: 1,
+        explanation: "Organize routes in the app directory using the App Router file-based system."
+      },
+      {
+        id: "next-14",
+        question: "What is the main advantage of Server Components?",
+        options: ["They run in the browser", "They run on the server, reducing client bundle", "They're faster to write", "They support all hooks"],
+        correctAnswer: 1,
+        explanation: "Server Components run on the server, reducing the client bundle size and improving performance."
+      },
+      {
+        id: "next-15",
+        question: "What does Next.js provide for production builds?",
+        options: ["Manual optimization", "Optimized production builds", "No optimization", "Basic builds only"],
+        correctAnswer: 1,
+        explanation: "Next.js provides optimized production builds with automatic optimizations."
+      }
+    ]
+  },
+  {
+    id: "aidd-framework",
+    title: "AIDD Framework Details",
+    description: "Learn about the AIDD framework implementation and architecture",
+    explainer: `The AIDD framework is the specific implementation used in this project for AI-assisted development. It builds on the general AIDD concepts with specific patterns and structures.
+
+Framework components:
+- Agent orchestrator for coordinating actions
+- Structured rules in .mdc files
+- Command system for common tasks
+- Task creator for systematic planning
+- TDD workflow integration
+- Redux state management with Autodux
+- Saga pattern for side effects
+
+Key files:
+- ai/rules/ - Contains rule definitions
+- ai/commands/ - Contains command implementations
+- Agent orchestrator coordinates all agents
+- Vision document guides all decisions
+
+Architecture:
+- Separation of concerns (state, UI, side-effects)
+- Functional programming principles
+- Container/presentation pattern
+- Redux with Autodux (not Redux Toolkit)
+- redux-saga for side effects`,
+    questions: [
+      {
+        id: "framework-1",
+        question: "What does the agent orchestrator do?",
+        options: ["Writes code", "Coordinates agent actions", "Runs tests", "Deploys apps"],
+        correctAnswer: 1,
+        explanation: "The agent orchestrator coordinates the actions of other agents using structured guidance."
+      },
+      {
+        id: "framework-2",
+        question: "What format are rule files stored in?",
+        options: [".js files", ".mdc files", ".json files", ".ts files"],
+        correctAnswer: 1,
+        explanation: "Rules are stored in .mdc (markdown) files with frontmatter."
+      },
+      {
+        id: "framework-3",
+        question: "What Redux solution does this framework use?",
+        options: ["Redux Toolkit", "Autodux", "Plain Redux", "Zustand"],
+        correctAnswer: 1,
+        explanation: "The framework uses Autodux and redux connect, avoiding Redux Toolkit."
+      },
+      {
+        id: "framework-4",
+        question: "What pattern is used for side effects?",
+        options: ["Redux Thunk", "Saga pattern", "useEffect only", "Callbacks"],
+        correctAnswer: 1,
+        explanation: "The framework uses redux-saga for side effects (the saga pattern)."
+      },
+      {
+        id: "framework-5",
+        question: "Where are command implementations stored?",
+        options: ["ai/rules/", "ai/commands/", "src/commands/", "lib/commands/"],
+        correctAnswer: 1,
+        explanation: "Command implementations are stored in the ai/commands/ directory."
+      },
+      {
+        id: "framework-6",
+        question: "What pattern is used for components with state?",
+        options: ["HOC pattern", "Container/presentation pattern", "Render props", "Compound components"],
+        correctAnswer: 1,
+        explanation: "The framework uses the container/presentation pattern for components with persisted state."
+      },
+      {
+        id: "framework-7",
+        question: "What should Autodux dux objects be saved as initially?",
+        options: [".js files", ".sudo files", ".ts files", ".mdc files"],
+        correctAnswer: 1,
+        explanation: "Autodux dux objects should be built and saved as .sudo files, then transpiled to .js."
+      },
+      {
+        id: "framework-8",
+        question: "What guides all framework decisions?",
+        options: ["README.md", "package.json", "Vision document", "AGENTS.md"],
+        correctAnswer: 2,
+        explanation: "The vision document guides all framework decisions and serves as the source of truth."
+      },
+      {
+        id: "framework-9",
+        question: "What should be separated in different modules?",
+        options: ["Only state and UI", "State management, UI, and side-effects", "Nothing", "Only UI and side-effects"],
+        correctAnswer: 1,
+        explanation: "Always separate state management, UI, and side-effects into different modules."
+      },
+      {
+        id: "framework-10",
+        question: "What workflow is integrated with the framework?",
+        options: ["Waterfall", "TDD", "Agile only", "Scrum"],
+        correctAnswer: 1,
+        explanation: "The framework integrates TDD (Test-Driven Development) workflow."
+      },
+      {
+        id: "framework-11",
+        question: "What should containers use to wire Redux?",
+        options: ["useSelector and useDispatch", "react-redux connect", "Context API", "Props drilling"],
+        correctAnswer: 1,
+        explanation: "Containers should use react-redux connect to wire actions and selectors."
+      },
+      {
+        id: "framework-12",
+        question: "What programming approach does the framework favor?",
+        options: ["Object-oriented", "Functional programming", "Procedural", "Mixed"],
+        correctAnswer: 1,
+        explanation: "The framework favors functional programming approaches with pure functions."
+      },
+      {
+        id: "framework-13",
+        question: "What is the task creator used for?",
+        options: ["Writing code", "Systematic task/epic planning", "Running tests", "Deploying apps"],
+        correctAnswer: 1,
+        explanation: "The task creator is used for systematic task/epic planning and execution."
+      },
+      {
+        id: "framework-14",
+        question: "What should NEVER be changed without clear requirements?",
+        options: ["Tests", "Source code", "Documentation", "Config files"],
+        correctAnswer: 1,
+        explanation: "Source code should never be changed without clear requirements, tests, and/or manual user approval."
+      },
+      {
+        id: "framework-15",
+        question: "What does the framework use for state management instead of Redux Toolkit?",
+        options: ["Zustand", "Jotai", "Autodux and redux connect", "Context API"],
+        correctAnswer: 2,
+        explanation: "The framework uses Autodux and redux connect, avoiding Redux Toolkit."
+      }
+    ]
+  },
+  {
     id: "typescript-advanced",
     title: "Advanced TypeScript Patterns",
     description: "Master TypeScript utility types, generics, and advanced patterns for productivity",
