@@ -137,6 +137,202 @@ Naming conventions emphasize active voice, clear verbs for functions, and yes/no
         options: ["Classes", "Inheritance", "Partial application and point-free style", "Mixins"],
         correctAnswer: 2,
         explanation: "Prefer composition with partial application and point-free style for cleaner, more functional code."
+      },
+      {
+        id: "js-16",
+        question: "What will be logged after calling test() twice in: function outer() { let count = 0; return function inner() { count++; console.log(count); }; } const test = outer(); test(); test();",
+        options: ["1, 1", "1, 2", "0, 1", "2, 2"],
+        correctAnswer: 1,
+        explanation: "The inner function forms a closure over count in outer. Each call increases count, so it logs 1 then 2."
+      },
+      {
+        id: "js-17",
+        question: "What will console.log(a) output before var a = 5; when using var?",
+        options: ["5", "undefined", "ReferenceError", "null"],
+        correctAnswer: 1,
+        explanation: "var hoists the declaration and initializes it to 'undefined', so accessing it before assignment returns undefined."
+      },
+      {
+        id: "js-18",
+        question: "If obj1 = {name: 'Alice'} and obj2 = obj1, then obj2.name = 'Bob'. What is obj1.name?",
+        options: ["'Alice'", "'Bob'", "undefined", "null"],
+        correctAnswer: 1,
+        explanation: "Both variables point to the same object in memory, so mutating obj2 also mutates obj1."
+      },
+      {
+        id: "js-19",
+        question: "What will greet(null) output for: function greet(name = 'Stranger') { console.log(name); }?",
+        options: ["'Stranger'", "null", "undefined", "Error"],
+        correctAnswer: 1,
+        explanation: "null is an existing value, not undefined, so it doesn't trigger the default parameter. Only undefined or missing arguments use defaults."
+      },
+      {
+        id: "js-20",
+        question: "What happens when you call person.greet() after: const greet = person.greet; greet();",
+        options: ["Logs person.name", "Logs undefined", "Throws error", "Logs 'greet'"],
+        correctAnswer: 1,
+        explanation: "greet is invoked in the global context where this is undefined. Use bind() to fix: const greet = person.greet.bind(person)."
+      },
+      {
+        id: "js-21",
+        question: "What does console.log(typeof a) output after: (function() { let a = 10; })(); console.log(typeof a);",
+        options: ["'number'", "'undefined'", "'object'", "ReferenceError"],
+        correctAnswer: 1,
+        explanation: "IIFE creates its own function scope. The variable a exists only inside the IIFE, so outside it's undefined."
+      },
+      {
+        id: "js-22",
+        question: "What does addFive(3) return for: function add(a) { return function(b) { return a + b; }; } const addFive = add(5);",
+        options: ["8", "5", "3", "15"],
+        correctAnswer: 0,
+        explanation: "The first call creates a closure that 'freezes' 5, available on the second call. Result: 5 + 3 = 8."
+      },
+      {
+        id: "js-23",
+        question: "What does 0 == '0' evaluate to?",
+        options: ["true", "false", "TypeError", "null"],
+        correctAnswer: 0,
+        explanation: "== performs type coercion, converting '0' to 0, so 0 == '0' is true. Use === for strict equality."
+      },
+      {
+        id: "js-24",
+        question: "In what order are these logged: console.log('Start'); setTimeout(() => console.log('Timeout'), 0); Promise.resolve().then(() => console.log('Promise')); console.log('End');",
+        options: ["Start, End, Promise, Timeout", "Start, Timeout, Promise, End", "Start, End, Timeout, Promise", "Start, Promise, End, Timeout"],
+        correctAnswer: 0,
+        explanation: "Synchronous code runs first (Start, End), then microtasks (Promise), then macrotasks (Timeout)."
+      },
+      {
+        id: "js-25",
+        question: "What error occurs when: let x = 1; function test() { console.log(x); let x = 2; } test();",
+        options: ["Logs 1", "Logs 2", "ReferenceError: Cannot access 'x' before initialization", "Logs undefined"],
+        correctAnswer: 2,
+        explanation: "let hoists only the declaration, not initialization. Accessing x before initialization in the same scope causes a ReferenceError."
+      },
+      {
+        id: "js-26",
+        question: "What does sum(1, 2, 3) return for: function sum(...numbers) { return numbers.reduce((acc, curr) => acc + curr, 0); }?",
+        options: ["6", "0", "undefined", "Error"],
+        correctAnswer: 0,
+        explanation: "The rest operator collects all arguments into an array. reduce sums them: 1 + 2 + 3 = 6."
+      },
+      {
+        id: "js-27",
+        question: "What does const {a, b = 2} = {a: 1}; console.log(a, b); output?",
+        options: ["1, 2", "1, undefined", "undefined, 2", "Error"],
+        correctAnswer: 0,
+        explanation: "Destructuring extracts a=1. Since b is missing, the default value 2 is used."
+      },
+      {
+        id: "js-28",
+        question: "After mutate(arr, obj) where mutate pushes to array and changes object.key, what happens to the original arr and obj?",
+        options: ["They remain unchanged", "They are mutated", "Only arr changes", "Only obj changes"],
+        correctAnswer: 1,
+        explanation: "Arrays and objects are passed by reference. Mutating them inside the function mutates the originals."
+      },
+      {
+        id: "js-29",
+        question: "What does '5' - 2 evaluate to?",
+        options: ["'52'", "3", "'3'", "NaN"],
+        correctAnswer: 1,
+        explanation: "The - operator triggers numeric coercion. '5' becomes 5, so 5 - 2 = 3."
+      },
+      {
+        id: "js-30",
+        question: "What does '5' + 2 evaluate to?",
+        options: ["'52'", "7", "'7'", "NaN"],
+        correctAnswer: 0,
+        explanation: "The + operator with a string operand triggers string concatenation. '5' + 2 = '52'."
+      },
+      {
+        id: "js-31",
+        question: "What does user.profile?.contact?.phone return if contact doesn't exist?",
+        options: ["undefined", "null", "Error", "'Not Found'"],
+        correctAnswer: 0,
+        explanation: "Optional chaining (?.) returns undefined when accessing a property that doesn't exist, instead of throwing an error."
+      },
+      {
+        id: "js-32",
+        question: "What does null ?? 'default' evaluate to?",
+        options: ["'default'", "null", "undefined", "Error"],
+        correctAnswer: 0,
+        explanation: "The nullish coalescing operator (??) returns the right-hand side when the left is null or undefined."
+      },
+      {
+        id: "js-33",
+        question: "What does 0 ?? 42 evaluate to?",
+        options: ["0", "42", "undefined", "null"],
+        correctAnswer: 0,
+        explanation: "The nullish coalescing operator only triggers for null/undefined. 0 is a valid value, so it returns 0."
+      },
+      {
+        id: "js-34",
+        question: "What is the benefit of dynamic imports (import())?",
+        options: ["Code splitting and lazy loading", "Faster initial load", "Conditional loading", "All of the above"],
+        correctAnswer: 3,
+        explanation: "Dynamic imports enable code splitting, lazy loading, conditional loading, and better performance by reducing initial bundle size."
+      },
+      {
+        id: "js-35",
+        question: "How does Promise.allSettled differ from Promise.all?",
+        options: ["No difference", "allSettled waits for all promises, all stops on first rejection", "all is faster", "allSettled is deprecated"],
+        correctAnswer: 1,
+        explanation: "Promise.allSettled waits for all promises to settle (fulfilled or rejected), while Promise.all stops on the first rejection."
+      },
+      {
+        id: "js-36",
+        question: "What happens when accessing p.#secret outside the class for: class Person { #secret = 'Hidden'; } const p = new Person();",
+        options: ["Returns 'Hidden'", "Returns undefined", "SyntaxError: Private field must be declared in enclosing class", "TypeError"],
+        correctAnswer: 2,
+        explanation: "Private fields (#) are only accessible inside the class. Accessing them outside throws a SyntaxError."
+      },
+      {
+        id: "js-37",
+        question: "What does x ||= 10 do when x = 0?",
+        options: ["x becomes 10", "x stays 0", "Error", "x becomes undefined"],
+        correctAnswer: 0,
+        explanation: "Logical OR assignment (||=) assigns the right value if the left is falsy. 0 is falsy, so x becomes 10."
+      },
+      {
+        id: "js-38",
+        question: "What does arr.at(-1) return for arr = [10, 20, 30, 40, 50]?",
+        options: ["50", "10", "undefined", "Error"],
+        correctAnswer: 0,
+        explanation: "The at() method accepts negative indices. at(-1) returns the last element: 50."
+      },
+      {
+        id: "js-39",
+        question: "What does weakRef.deref() return after the object is garbage collected?",
+        options: ["The object", "undefined", "null", "Error"],
+        correctAnswer: 1,
+        explanation: "WeakRef.deref() returns the object if it hasn't been garbage collected, or undefined if it has been collected."
+      },
+      {
+        id: "js-40",
+        question: "Are Symbol('id') and Symbol('id') equal?",
+        options: ["Yes, they're equal", "No, symbols are always unique", "Only if created together", "Depends on context"],
+        correctAnswer: 1,
+        explanation: "Symbols are always unique, even if created with the same description. Each Symbol() call creates a new unique symbol."
+      },
+      {
+        id: "js-41",
+        question: "What does a Proxy's get trap allow you to do?",
+        options: ["Intercept property access", "Prevent access", "Return custom values", "All of the above"],
+        correctAnswer: 3,
+        explanation: "Proxy get traps intercept property access, allowing you to return custom values, prevent access, or add logic."
+      },
+      {
+        id: "js-42",
+        question: "What does Promise.any() return?",
+        options: ["First fulfilled promise", "First rejected promise", "All promises", "Last promise"],
+        correctAnswer: 0,
+        explanation: "Promise.any() resolves to the first fulfilled promise, or throws an AggregateError if all promises reject."
+      },
+      {
+        id: "js-43",
+        question: "What does function* generateSequence() { yield 1; yield 2; } create?",
+        options: ["A regular function", "A generator function", "An async function", "An arrow function"],
+        correctAnswer: 1,
+        explanation: "The function* syntax creates a generator function that yields values lazily using the iterator protocol."
       }
     ]
   },
@@ -523,6 +719,83 @@ Best practices:
         options: ["Object-oriented", "Functional programming", "Procedural", "Imperative"],
         correctAnswer: 1,
         explanation: "Favor functional programming approaches with pure functions and immutability."
+      },
+      {
+        id: "react-16",
+        question: "What is the difference between Component and PureComponent?",
+        options: ["No difference", "PureComponent does shallow comparison in shouldComponentUpdate", "Component is faster", "PureComponent doesn't re-render"],
+        correctAnswer: 1,
+        explanation: "PureComponent implements shouldComponentUpdate with shallow comparison, preventing re-renders when props/state haven't changed."
+      },
+      {
+        id: "react-17",
+        question: "Why is Context + shouldComponentUpdate dangerous?",
+        options: ["They conflict", "Context updates don't respect shouldComponentUpdate", "Performance issues", "Both B and C"],
+        correctAnswer: 3,
+        explanation: "Context updates don't respect shouldComponentUpdate and will re-render all subscribed components, potentially causing unexpected behavior."
+      },
+      {
+        id: "react-18",
+        question: "What are 3 ways to pass information from a component to its parent?",
+        options: ["Props only", "Callback functions, Context API, state management libraries", "Only callbacks", "Props and state"],
+        correctAnswer: 1,
+        explanation: "Common methods: callback functions (most direct), Context API, and state management libraries (Redux, Zustand). Also refs and event bubbling."
+      },
+      {
+        id: "react-19",
+        question: "What are 2 ways to prevent components from re-rendering?",
+        options: ["Nothing works", "React.memo and useMemo/useCallback", "Only React.memo", "Only useMemo"],
+        correctAnswer: 1,
+        explanation: "React.memo prevents re-renders based on props. useMemo caches expensive calculations, useCallback memoizes functions to prevent child re-renders."
+      },
+      {
+        id: "react-20",
+        question: "What is a Fragment and why do we need it?",
+        options: ["A DOM element", "A wrapper that doesn't add DOM nodes", "A component", "A hook"],
+        correctAnswer: 1,
+        explanation: "Fragments (<></> or <Fragment>) group elements without adding extra DOM nodes, satisfying React's single element return requirement."
+      },
+      {
+        id: "react-21",
+        question: "What are 3 examples of the HOC (Higher-Order Component) pattern?",
+        options: ["Components only", "withAuthorization, withLoading, withLogging", "Hooks only", "No examples"],
+        correctAnswer: 1,
+        explanation: "HOCs wrap components to add behavior: withAuthorization (auth checks), withLoading (loading states), withLogging (logging)."
+      },
+      {
+        id: "react-22",
+        question: "What's the difference in handling exceptions in promises, callbacks, and async/await?",
+        options: ["No difference", "Promises use .catch(), callbacks use err param, async/await uses try/catch", "All use try/catch", "All use .catch()"],
+        correctAnswer: 1,
+        explanation: "Promises: .then()/.catch(). Callbacks: err as first parameter (Node.js style). async/await: try/catch blocks."
+      },
+      {
+        id: "react-23",
+        question: "How many arguments does setState take and why is it async?",
+        options: ["1 argument, synchronous", "2 arguments (update, callback), async for batching", "1 argument, async", "3 arguments"],
+        correctAnswer: 1,
+        explanation: "setState takes state update and optional callback. It's async because React batches multiple setState calls for performance and consistency."
+      },
+      {
+        id: "react-24",
+        question: "What are steps to migrate a Class to Function Component?",
+        options: ["No migration needed", "Change class to function, remove this, use hooks, remove render method", "Just change syntax", "Impossible"],
+        correctAnswer: 1,
+        explanation: "Change class to function, remove constructor/lifecycle methods, replace this.setState with useState, use useEffect for side effects, remove render method."
+      },
+      {
+        id: "react-25",
+        question: "How can styles be used with components?",
+        options: ["Only inline", "Inline, CSS, SASS, CSS modules, CSS-in-JS, Tailwind, component libraries", "Only CSS", "Only CSS-in-JS"],
+        correctAnswer: 1,
+        explanation: "Many options: inline styles, plain CSS, SASS/SCSS, CSS modules, CSS-in-JS (Styled Components, Emotion), Tailwind, Bootstrap, component libraries (MUI, Chakra)."
+      },
+      {
+        id: "react-26",
+        question: "How to render an HTML string coming from the server?",
+        options: ["Directly in JSX", "dangerouslySetInnerHTML after sanitization", "Not possible", "Only with libraries"],
+        correctAnswer: 1,
+        explanation: "Use dangerouslySetInnerHTML prop, but always sanitize HTML strings first to prevent XSS attacks, especially from untrusted sources."
       }
     ]
   },
@@ -923,6 +1196,111 @@ Productivity patterns:
         options: ["Using 'unknown' and type guards", "Type assertions", "Disabling strict mode", "Using 'as any'"],
         correctAnswer: 0,
         explanation: "Using 'unknown' with type guards is the safest way to handle untyped data, forcing explicit type narrowing."
+      },
+      {
+        id: "ts-16",
+        question: "What happens when you assign a number to a variable declared as string: let message: string = 'Hello'; message = 123;?",
+        options: ["Works fine", "TypeScript Error: Type 'number' is not assignable to type 'string'", "Runtime error", "Silent failure"],
+        correctAnswer: 1,
+        explanation: "TypeScript catches type errors at compile time. Assigning a number to a string-typed variable causes a type error."
+      },
+      {
+        id: "ts-17",
+        question: "What does (unknownValue as string).length do?",
+        options: ["Type assertion that treats unknownValue as string", "Type guard", "Type check", "Runtime conversion"],
+        correctAnswer: 0,
+        explanation: "The 'as string' syntax is a type assertion, telling TypeScript to treat unknownValue as a string type."
+      },
+      {
+        id: "ts-18",
+        question: "What does getProperty(person, 'name') return for: function getProperty<T, K extends keyof T>(obj: T, key: K) { return obj[key]; }?",
+        options: ["The value of person.name", "The type of person.name", "An error", "undefined"],
+        correctAnswer: 0,
+        explanation: "The function uses keyof T to ensure key exists on obj, then returns obj[key] with proper type inference."
+      },
+      {
+        id: "ts-19",
+        question: "What does updateTask(task, {description: 'Practice'}) do with Partial<Task>?",
+        options: ["Replaces entire task", "Makes all properties optional for partial updates", "Throws error", "Does nothing"],
+        correctAnswer: 1,
+        explanation: "Partial<T> makes all properties optional, enabling partial updates without requiring all fields."
+      },
+      {
+        id: "ts-20",
+        question: "What does Required<Options> do?",
+        options: ["Makes all properties optional", "Makes all properties required", "Removes all properties", "Adds new properties"],
+        correctAnswer: 1,
+        explanation: "Required<T> makes all optional properties required, enforcing their presence at compile time."
+      },
+      {
+        id: "ts-21",
+        question: "What does typeof id === 'string' do in a type guard?",
+        options: ["Runtime check only", "Narrows the type within the if block", "Type assertion", "Nothing"],
+        correctAnswer: 1,
+        explanation: "TypeScript uses typeof in type guards to narrow types. Inside the if block, id is treated as string."
+      },
+      {
+        id: "ts-22",
+        question: "What pattern uses a 'kind' property to differentiate types?",
+        options: ["Type guards", "Discriminated unions", "Branded types", "Template literals"],
+        correctAnswer: 1,
+        explanation: "Discriminated unions use a common property (like 'kind') to help TypeScript narrow types correctly."
+      },
+      {
+        id: "ts-23",
+        question: "What does @LogClass do in: @LogClass class Service {}?",
+        options: ["Runs at runtime", "Executes when class is defined", "Only works in decorators", "Both B and C"],
+        correctAnswer: 3,
+        explanation: "Class decorators execute when the class is defined, not when instantiated. This requires decorator support."
+      },
+      {
+        id: "ts-24",
+        question: "What does Status.Active return for: enum Status { Active, Inactive }?",
+        options: ["0", "'Active'", "1", "undefined"],
+        correctAnswer: 0,
+        explanation: "Numeric enums default to starting at 0, so Status.Active = 0, Status.Inactive = 1."
+      },
+      {
+        id: "ts-25",
+        question: "What does getLength('Hello') return for: function getLength<T extends { length: number }>(item: T): number?",
+        options: ["5", "Error", "undefined", "null"],
+        correctAnswer: 0,
+        explanation: "The constraint T extends { length: number } ensures T has a length property. 'Hello'.length = 5."
+      },
+      {
+        id: "ts-26",
+        question: "What does Readonly<Todo> do?",
+        options: ["Makes properties mutable", "Makes all properties readonly", "Removes properties", "Adds new properties"],
+        correctAnswer: 1,
+        explanation: "Readonly<T> utility type makes all properties in T immutable, preventing assignment after initialization."
+      },
+      {
+        id: "ts-27",
+        question: "What does IsString<string> evaluate to for: type IsString<T> = T extends string ? 'yes' : 'no';?",
+        options: ["'yes'", "'no'", "boolean", "Error"],
+        correctAnswer: 0,
+        explanation: "Conditional types check if T extends string. Since string extends string, it returns 'yes'."
+      },
+      {
+        id: "ts-28",
+        question: "What does CapitalizeWord<'typescript'> evaluate to for: type CapitalizeWord<T extends string> = Capitalize<T>;?",
+        options: ["'Typescript'", "'typescript'", "'TYPESCRIPT'", "Error"],
+        correctAnswer: 0,
+        explanation: "The Capitalize<T> utility type capitalizes the first letter of the string: 'typescript' → 'Typescript'."
+      },
+      {
+        id: "ts-29",
+        question: "What does ReturnTypeOf<typeof greet> extract for a function that returns string?",
+        options: ["string", "void", "any", "unknown"],
+        correctAnswer: 0,
+        explanation: "ReturnTypeOf uses 'infer R' to extract the return type from the function type, resulting in string."
+      },
+      {
+        id: "ts-30",
+        question: "What does module augmentation allow?",
+        options: ["Extending third-party module definitions", "Creating new modules", "Deleting modules", "Runtime changes only"],
+        correctAnswer: 0,
+        explanation: "Module augmentation allows extending third-party module definitions without modifying the original source."
       }
     ]
   },
@@ -1574,6 +1952,161 @@ Productivity patterns:
         options: ["Write once, never update", "Keep tests simple and focused", "Test everything", "No maintenance"],
         correctAnswer: 1,
         explanation: "Keep tests simple, focused, and maintainable. Tests should be easy to understand and update when requirements change."
+      }
+    ]
+  },
+  {
+    id: "nodejs-backend",
+    title: "Node.js & Backend Patterns",
+    description: "Learn Node.js, Express, and backend development patterns",
+    explainer: `Node.js enables JavaScript on the server, powering backend APIs and server-side applications. This module covers middleware patterns, Express.js, and backend development concepts.
+
+Key topics:
+- Middleware pattern and request/response processing
+- Express.js framework patterns
+- Request/response modification
+- Error handling in middleware
+- Authentication and authorization
+- Logging and auditing
+- Caching strategies
+- Data transformation
+
+Backend patterns:
+- Middleware chaining
+- Request validation
+- Response formatting
+- Error middleware
+- Async middleware patterns`,
+    questions: [
+      {
+        id: "node-1",
+        question: "What is middleware in JavaScript/Node.js?",
+        options: ["A database", "A software design pattern for sequential function execution", "A framework", "A language feature"],
+        correctAnswer: 1,
+        explanation: "Middleware is a design pattern that enables functions to execute sequentially, processing requests and responses in Node.js/Express applications."
+      },
+      {
+        id: "node-2",
+        question: "What is the typical middleware function signature?",
+        options: ["(req, res) => {}", "(req, res, next) => {}", "(req) => {}", "(res) => {}"],
+        correctAnswer: 1,
+        explanation: "Middleware functions typically take (req, res, next) where req is request, res is response, and next passes control to the next middleware."
+      },
+      {
+        id: "node-3",
+        question: "What does the 'next' function do in middleware?",
+        options: ["Stops execution", "Passes control to the next middleware", "Returns a response", "Throws an error"],
+        correctAnswer: 1,
+        explanation: "Calling next() passes control to the next middleware function in the chain, enabling sequential processing."
+      },
+      {
+        id: "node-4",
+        question: "What can middleware do?",
+        options: ["Only modify requests", "Modify requests/responses, handle errors, authentication, logging", "Only handle errors", "Only authentication"],
+        correctAnswer: 1,
+        explanation: "Middleware can modify requests/responses, handle errors, perform authentication/authorization, logging, caching, and data transformation."
+      },
+      {
+        id: "node-5",
+        question: "What is express.json() middleware used for?",
+        options: ["Serving static files", "Parsing JSON request bodies", "Handling errors", "Authentication"],
+        correctAnswer: 1,
+        explanation: "express.json() is built-in Express middleware that parses incoming JSON request bodies, making them available in req.body."
+      }
+    ]
+  },
+  {
+    id: "js-challenges",
+    title: "JavaScript Coding Challenges",
+    description: "Practice with JavaScript and React coding challenges and edge cases",
+    explainer: `Coding challenges help identify common pitfalls and edge cases in JavaScript and React. This module covers practical challenges, debugging scenarios, and solutions to common problems.
+
+Key topics:
+- React component anti-patterns
+- Function binding and context issues
+- Closure and scope challenges
+- Prototype extensions
+- Array manipulation
+- Event loop behavior
+- Type coercion gotchas
+- React performance issues
+
+Challenge patterns:
+- Identifying and fixing bugs
+- Understanding execution order
+- Context and binding problems
+- Memory and performance issues
+- Edge case handling`,
+    questions: [
+      {
+        id: "challenge-1",
+        question: "What's wrong with: class WelcomeMessage extends React.Component { constructor(props) { super(props); this.state = { name: this.props.name || 'Anonymous' }; } render() { return <p>Hello {this.state.name}</p>; } }?",
+        options: ["Nothing", "Using state unnecessarily for a prop that doesn't change", "Missing key prop", "Wrong syntax"],
+        correctAnswer: 1,
+        explanation: "Using state for a prop that doesn't change means it won't reflect updates to props.name. Use functional component: const WelcomeMessage = ({ name = 'Anonymous' }) => <p>Hello {name}</p>;"
+      },
+      {
+        id: "challenge-2",
+        question: "What happens with: <button onClick={this.handleClick1()}>click 1</button>?",
+        options: ["Calls on click", "Executes during render, not on click", "Does nothing", "Throws error"],
+        correctAnswer: 1,
+        explanation: "handleClick1() is called immediately during render, not when clicked. Should be: onClick={this.handleClick1} (without parentheses)."
+      },
+      {
+        id: "challenge-3",
+        question: "What does this return: const a = 10; function b() { return a; } ((f) => { const a = 5; return f(); })(b);?",
+        options: ["5", "10", "undefined", "Error"],
+        correctAnswer: 1,
+        explanation: "Function b closes over the outer scope where a = 10. The inner a = 5 doesn't affect b's closure, so it returns 10."
+      },
+      {
+        id: "challenge-4",
+        question: "What will this print: for (var i = 0; i < 10; i++) { setTimeout(() => console.log(i), 10); }?",
+        options: ["0-9", "10 ten times", "0-9 then 10", "Nothing"],
+        correctAnswer: 1,
+        explanation: "var is function-scoped, so all timeouts see the same i after the loop completes (i = 10). Fix: use let for block scope."
+      },
+      {
+        id: "challenge-5",
+        question: "What happens with: var feedback = { message: 'Hello', send() { console.log(this.message); } }; setTimeout(feedback.send);?",
+        options: ["Logs 'Hello'", "Logs undefined", "Throws error", "Nothing"],
+        correctAnswer: 1,
+        explanation: "this is lost when passing feedback.send directly. Fix: setTimeout(() => feedback.send()) or setTimeout(feedback.send.bind(feedback))."
+      },
+      {
+        id: "challenge-6",
+        question: "What does this CSS selector target: [role='navigation'] > ul a:not([href^='mailto'])?",
+        options: ["All links", "Links in navigation ul that don't start with mailto:", "Only mailto links", "Nothing"],
+        correctAnswer: 1,
+        explanation: "Selects <a> elements inside <ul> that is a direct child of [role='navigation'], excluding links that start with 'mailto:'."
+      },
+      {
+        id: "challenge-7",
+        question: "What is the difference between % and rem units?",
+        options: ["No difference", "% is relative to parent, rem is relative to root font-size", "rem is relative to parent", "% is absolute"],
+        correctAnswer: 1,
+        explanation: "% is relative to the parent container. rem is relative to the root element's (html) font-size, making it more predictable."
+      },
+      {
+        id: "challenge-8",
+        question: "What does this output: (function() { f(); f = function() { console.log(1); }; })(); function f() { console.log(2); } f();?",
+        options: ["2, 1", "1, 2", "2, 2", "1, 1"],
+        correctAnswer: 0,
+        explanation: "Function declarations hoist, so first f() calls the hoisted function (logs 2). Then f is reassigned, so second f() logs 1."
+      },
+      {
+        id: "challenge-9",
+        question: "What's the issue with PureComponent when passing object props?",
+        options: ["No issue", "Shallow comparison doesn't detect object mutations", "Too slow", "Doesn't work"],
+        correctAnswer: 1,
+        explanation: "PureComponent uses shallow comparison. If you mutate an object (data.value++), the reference doesn't change, so it won't re-render."
+      },
+      {
+        id: "challenge-10",
+        question: "How do you find duplicates in an unsorted array efficiently?",
+        options: ["Nested loops", "Use Set to track seen values", "Sort first", "All of the above"],
+        correctAnswer: 1,
+        explanation: "Using a Set to track seen values provides O(n) time complexity. Nested loops are O(n²), sorting is O(n log n)."
       }
     ]
   }

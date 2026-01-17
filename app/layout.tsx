@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Learn AIDD Quiz App",
-  description: "Interactive quiz app for learning JavaScript, AIDD, SudoLang, React, Next.js, and the AIDD framework",
+  title: "Learn AIDD - Advanced JavaScript & React Quiz Platform",
+  description: "Comprehensive interactive quiz platform covering JavaScript fundamentals, Advanced TypeScript patterns, React best practices, Next.js features, Node.js backend patterns, coding challenges, and the AIDD framework. Master advanced concepts through hands-on practice with 200+ questions.",
 };
 
 export default function RootLayout({
