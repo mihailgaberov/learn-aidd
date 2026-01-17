@@ -38,6 +38,7 @@ export default function ModulePage() {
     setQuestions(randomQuestions);
     setAnswers(new Array(randomQuestions.length).fill(-1));
     setCurrentQuestionIndex(0);
+    setScore(0); // Reset score when starting a new quiz
     setState("quiz");
   };
 
@@ -64,7 +65,13 @@ export default function ModulePage() {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:ring-2 focus:ring-blue-500"
+      >
+        Skip to main content
+      </a>
+      <div id="main-content" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <nav className="mb-6" aria-label="Breadcrumb navigation">
           <Link
             href="/"
@@ -89,13 +96,14 @@ export default function ModulePage() {
                   aria-valuemin={1}
                   aria-valuemax={questions.length}
                   aria-label={`Quiz progress: question ${currentQuestionIndex + 1} of ${questions.length}`}
-                  className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-2"
+                  className="w-full bg-zinc-200 dark:bg-zinc-800 rounded-full h-3"
                 >
                   <div
-                    className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                    className="bg-blue-600 dark:bg-blue-500 h-3 rounded-full transition-all duration-300"
                     style={{
                       width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`,
                     }}
+                    aria-hidden="true"
                   />
                 </div>
               </div>

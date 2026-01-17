@@ -4,7 +4,13 @@ import ModuleCard from "./components/ModuleCard";
 export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:ring-2 focus:ring-blue-500"
+      >
+        Skip to main content
+      </a>
+      <div id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
             Learn AIDD Quiz App

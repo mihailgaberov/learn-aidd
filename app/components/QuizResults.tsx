@@ -22,9 +22,10 @@ export default function QuizResults({
         <div
           className={`text-6xl font-bold mb-4 ${
             isPassing
-              ? "text-green-600 dark:text-green-400"
-              : "text-blue-600 dark:text-blue-400"
+              ? "text-green-700 dark:text-green-300"
+              : "text-blue-700 dark:text-blue-300"
           }`}
+          aria-label={`Score: ${percentage} percent`}
         >
           {percentage}%
         </div>
