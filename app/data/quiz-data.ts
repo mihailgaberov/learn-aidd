@@ -140,38 +140,38 @@ Naming conventions emphasize active voice, clear verbs for functions, and yes/no
       },
       {
         id: "js-16",
-        question: "What will be logged after calling test() twice in: function outer() { let count = 0; return function inner() { count++; console.log(count); }; } const test = outer(); test(); test();",
+        question: "What will be logged after calling test() twice?\n```javascript\nfunction outer() {\n  let count = 0;\n  return function inner() {\n    count++;\n    console.log(count);\n  };\n}\nconst test = outer();\ntest();\ntest();\n```",
         options: ["1, 1", "1, 2", "0, 1", "2, 2"],
         correctAnswer: 1,
-        explanation: "The inner function forms a closure over count in outer. Each call increases count, so it logs 1 then 2."
+        explanation: "The inner function forms a closure over count in outer. Each call increases count, so it logs 1 then 2. Closures preserve the variable's state across function calls."
       },
       {
         id: "js-17",
-        question: "What will console.log(a) output before var a = 5; when using var?",
+        question: "What will console.log(a) output?\n```javascript\nconsole.log(a);\nvar a = 5;\n```",
         options: ["5", "undefined", "ReferenceError", "null"],
         correctAnswer: 1,
-        explanation: "var hoists the declaration and initializes it to 'undefined', so accessing it before assignment returns undefined."
+        explanation: "var hoists the declaration and initializes it to 'undefined', so accessing it before assignment returns undefined.\n\n**Note:** With let/const, this would throw a ReferenceError."
       },
       {
         id: "js-18",
-        question: "If obj1 = {name: 'Alice'} and obj2 = obj1, then obj2.name = 'Bob'. What is obj1.name?",
+        question: "What is obj1.name after this code runs?\n```javascript\nlet obj1 = { name: 'Alice' };\nlet obj2 = obj1;\nobj2.name = 'Bob';\nconsole.log(obj1.name);\n```",
         options: ["'Alice'", "'Bob'", "undefined", "null"],
         correctAnswer: 1,
-        explanation: "Both variables point to the same object in memory, so mutating obj2 also mutates obj1."
+        explanation: "Both variables point to the same object in memory, so mutating obj2 also mutates obj1. Objects are passed by reference, not by value."
       },
       {
         id: "js-19",
-        question: "What will greet(null) output for: function greet(name = 'Stranger') { console.log(name); }?",
+        question: "What will greet(null) output?\n```javascript\nfunction greet(name = 'Stranger') {\n  console.log(name);\n}\ngreet();\ngreet(undefined);\ngreet(null);\n```",
         options: ["'Stranger'", "null", "undefined", "Error"],
         correctAnswer: 1,
-        explanation: "null is an existing value, not undefined, so it doesn't trigger the default parameter. Only undefined or missing arguments use defaults."
+        explanation: "null is an existing value, not undefined, so it doesn't trigger the default parameter.\n\n**Output:**\n- greet() → 'Stranger'\n- greet(undefined) → 'Stranger'\n- greet(null) → null\n\nOnly undefined or missing arguments use defaults."
       },
       {
         id: "js-20",
-        question: "What happens when you call person.greet() after: const greet = person.greet; greet();",
+        question: "What happens when you call greet()?\n```javascript\nconst person = {\n  name: 'Sam',\n  greet() {\n    console.log(this.name);\n  }\n};\nconst greet = person.greet;\ngreet();\n```",
         options: ["Logs person.name", "Logs undefined", "Throws error", "Logs 'greet'"],
         correctAnswer: 1,
-        explanation: "greet is invoked in the global context where this is undefined. Use bind() to fix: const greet = person.greet.bind(person)."
+        explanation: "greet is invoked in the global context where this is undefined.\n\n**Fix:** Use bind() to preserve context:\n```javascript\nconst greet = person.greet.bind(person);\ngreet(); // Logs 'Sam'\n```"
       },
       {
         id: "js-21",
@@ -182,24 +182,24 @@ Naming conventions emphasize active voice, clear verbs for functions, and yes/no
       },
       {
         id: "js-22",
-        question: "What does addFive(3) return for: function add(a) { return function(b) { return a + b; }; } const addFive = add(5);",
+        question: "What does addFive(3) return?\n```javascript\nfunction add(a) {\n  return function(b) {\n    return a + b;\n  };\n}\nconst addFive = add(5);\nconsole.log(addFive(3));\n```",
         options: ["8", "5", "3", "15"],
         correctAnswer: 0,
-        explanation: "The first call creates a closure that 'freezes' 5, available on the second call. Result: 5 + 3 = 8."
+        explanation: "The first call creates a closure that 'freezes' 5, available on the second call. Result: 5 + 3 = 8. This is an example of currying and partial application."
       },
       {
         id: "js-23",
-        question: "What does 0 == '0' evaluate to?",
-        options: ["true", "false", "TypeError", "null"],
+        question: "What do these equality checks evaluate to?\n```javascript\nconsole.log(0 == '0');\nconsole.log(0 === '0');\nconsole.log(false == '0');\n```",
+        options: ["true, false, true", "false, false, false", "true, true, true", "Error"],
         correctAnswer: 0,
-        explanation: "== performs type coercion, converting '0' to 0, so 0 == '0' is true. Use === for strict equality."
+        explanation: "== performs type coercion:\n- 0 == '0' → true (coerces '0' to 0)\n- 0 === '0' → false (strict equality, no coercion)\n- false == '0' → true (coerces both)\n\n**Always use === for strict equality.**"
       },
       {
         id: "js-24",
-        question: "In what order are these logged: console.log('Start'); setTimeout(() => console.log('Timeout'), 0); Promise.resolve().then(() => console.log('Promise')); console.log('End');",
+        question: "In what order are these logged?\n```javascript\nconsole.log('Start');\nsetTimeout(() => console.log('Timeout'), 0);\nPromise.resolve().then(() => console.log('Promise'));\nconsole.log('End');\n```",
         options: ["Start, End, Promise, Timeout", "Start, Timeout, Promise, End", "Start, End, Timeout, Promise", "Start, Promise, End, Timeout"],
         correctAnswer: 0,
-        explanation: "Synchronous code runs first (Start, End), then microtasks (Promise), then macrotasks (Timeout)."
+        explanation: "Event loop execution order:\n1. Synchronous code (Start, End)\n2. Microtasks (Promise)\n3. Macrotasks (Timeout)\n\nMicrotasks (promises) run before macrotasks (setTimeout)."
       },
       {
         id: "js-25",
@@ -722,10 +722,10 @@ Best practices:
       },
       {
         id: "react-16",
-        question: "What is the difference between Component and PureComponent?",
+        question: "What is the difference between Component and PureComponent?\n```jsx\n// Regular Component\nclass MyComponent extends React.Component {\n  render() { return <div>{this.props.data}</div>; }\n}\n\n// PureComponent\nclass MyPureComponent extends React.PureComponent {\n  render() { return <div>{this.props.data}</div>; }\n}\n```",
         options: ["No difference", "PureComponent does shallow comparison in shouldComponentUpdate", "Component is faster", "PureComponent doesn't re-render"],
         correctAnswer: 1,
-        explanation: "PureComponent implements shouldComponentUpdate with shallow comparison, preventing re-renders when props/state haven't changed."
+        explanation: "PureComponent implements shouldComponentUpdate with shallow comparison, preventing re-renders when props/state haven't changed. Regular Component re-renders on every parent update."
       },
       {
         id: "react-17",
@@ -743,7 +743,7 @@ Best practices:
       },
       {
         id: "react-19",
-        question: "What are 2 ways to prevent components from re-rendering?",
+        question: "What are 2 ways to prevent components from re-rendering?\n```jsx\n// React.memo\nconst Child = React.memo(({ onClick }) => {\n  return <button onClick={onClick}>Click Me</button>;\n});\n\n// useCallback\nconst handleClick = React.useCallback(() => {\n  console.log('click');\n}, []);\n\n// useMemo\nconst data = React.useMemo(() => ({ value: 'Hello' }), []);\n```",
         options: ["Nothing works", "React.memo and useMemo/useCallback", "Only React.memo", "Only useMemo"],
         correctAnswer: 1,
         explanation: "React.memo prevents re-renders based on props. useMemo caches expensive calculations, useCallback memoizes functions to prevent child re-renders."
@@ -1199,24 +1199,24 @@ Productivity patterns:
       },
       {
         id: "ts-16",
-        question: "What happens when you assign a number to a variable declared as string: let message: string = 'Hello'; message = 123;?",
+        question: "What happens with this code?\n```typescript\nlet message: string = 'Hello';\nmessage = 123;\n```",
         options: ["Works fine", "TypeScript Error: Type 'number' is not assignable to type 'string'", "Runtime error", "Silent failure"],
         correctAnswer: 1,
-        explanation: "TypeScript catches type errors at compile time. Assigning a number to a string-typed variable causes a type error."
+        explanation: "TypeScript catches type errors at compile time. Assigning a number to a string-typed variable causes a type error before the code runs."
       },
       {
         id: "ts-17",
-        question: "What does (unknownValue as string).length do?",
+        question: "What does this code do?\n```typescript\nlet unknownValue: any = 'Hello World';\nlet strLength: number = (unknownValue as string).length;\nconsole.log(strLength);\n```",
         options: ["Type assertion that treats unknownValue as string", "Type guard", "Type check", "Runtime conversion"],
         correctAnswer: 0,
-        explanation: "The 'as string' syntax is a type assertion, telling TypeScript to treat unknownValue as a string type."
+        explanation: "The 'as string' syntax is a type assertion, telling TypeScript to treat unknownValue as a string type. Output: 11"
       },
       {
         id: "ts-18",
-        question: "What does getProperty(person, 'name') return for: function getProperty<T, K extends keyof T>(obj: T, key: K) { return obj[key]; }?",
+        question: "What does getProperty(person, 'name') return?\n```typescript\nfunction getProperty<T, K extends keyof T>(obj: T, key: K) {\n  return obj[key];\n}\nconst person = { name: 'John', age: 30 };\nconsole.log(getProperty(person, 'name'));\n```",
         options: ["The value of person.name", "The type of person.name", "An error", "undefined"],
         correctAnswer: 0,
-        explanation: "The function uses keyof T to ensure key exists on obj, then returns obj[key] with proper type inference."
+        explanation: "The function uses keyof T to ensure key exists on obj, then returns obj[key] with proper type inference. Output: 'John'"
       },
       {
         id: "ts-19",
@@ -2040,42 +2040,42 @@ Challenge patterns:
     questions: [
       {
         id: "challenge-1",
-        question: "What's wrong with: class WelcomeMessage extends React.Component { constructor(props) { super(props); this.state = { name: this.props.name || 'Anonymous' }; } render() { return <p>Hello {this.state.name}</p>; } }?",
+        question: "What's wrong with this React component?\n```jsx\nclass WelcomeMessage extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = { name: this.props.name || 'Anonymous' };\n  }\n  render() {\n    return <p>Hello {this.state.name}</p>;\n  }\n}\n```",
         options: ["Nothing", "Using state unnecessarily for a prop that doesn't change", "Missing key prop", "Wrong syntax"],
         correctAnswer: 1,
-        explanation: "Using state for a prop that doesn't change means it won't reflect updates to props.name. Use functional component: const WelcomeMessage = ({ name = 'Anonymous' }) => <p>Hello {name}</p>;"
+        explanation: "Using state for a prop that doesn't change means it won't reflect updates to props.name.\n\n**Fix:** Use a functional component:\n```jsx\nconst WelcomeMessage = ({ name = 'Anonymous' }) => \n  <p>Hello {name}</p>;\n```"
       },
       {
         id: "challenge-2",
-        question: "What happens with: <button onClick={this.handleClick1()}>click 1</button>?",
+        question: "What happens with this button?\n```jsx\n<button onClick={this.handleClick1()}>click 1</button>\n```",
         options: ["Calls on click", "Executes during render, not on click", "Does nothing", "Throws error"],
         correctAnswer: 1,
-        explanation: "handleClick1() is called immediately during render, not when clicked. Should be: onClick={this.handleClick1} (without parentheses)."
+        explanation: "handleClick1() is called immediately during render, not when clicked.\n\n**Fix:** Remove the parentheses:\n```jsx\n<button onClick={this.handleClick1}>click 1</button>\n```"
       },
       {
         id: "challenge-3",
-        question: "What does this return: const a = 10; function b() { return a; } ((f) => { const a = 5; return f(); })(b);?",
+        question: "What does this code return?\n```javascript\nconst a = 10;\nfunction b() { return a; }\n((f) => {\n  const a = 5;\n  return f();\n})(b);\n```",
         options: ["5", "10", "undefined", "Error"],
         correctAnswer: 1,
-        explanation: "Function b closes over the outer scope where a = 10. The inner a = 5 doesn't affect b's closure, so it returns 10."
+        explanation: "Function b closes over the outer scope where a = 10. The inner a = 5 doesn't affect b's closure, so it returns 10. Closures capture variables from their lexical environment at creation time."
       },
       {
         id: "challenge-4",
-        question: "What will this print: for (var i = 0; i < 10; i++) { setTimeout(() => console.log(i), 10); }?",
+        question: "What will this code print?\n```javascript\nfor (var i = 0; i < 10; i++) {\n  setTimeout(() => console.log(i), 10);\n}\n```",
         options: ["0-9", "10 ten times", "0-9 then 10", "Nothing"],
         correctAnswer: 1,
-        explanation: "var is function-scoped, so all timeouts see the same i after the loop completes (i = 10). Fix: use let for block scope."
+        explanation: "var is function-scoped, so all timeouts see the same i after the loop completes (i = 10).\n\n**Fix:** Use let for block scope:\n```javascript\nfor (let i = 0; i < 10; i++) {\n  setTimeout(() => console.log(i), 10);\n}\n```"
       },
       {
         id: "challenge-5",
-        question: "What happens with: var feedback = { message: 'Hello', send() { console.log(this.message); } }; setTimeout(feedback.send);?",
+        question: "What happens with this code?\n```javascript\nvar feedback = {\n  message: 'Hello',\n  send() {\n    console.log(this.message);\n  }\n};\nsetTimeout(feedback.send);\n```",
         options: ["Logs 'Hello'", "Logs undefined", "Throws error", "Nothing"],
         correctAnswer: 1,
-        explanation: "this is lost when passing feedback.send directly. Fix: setTimeout(() => feedback.send()) or setTimeout(feedback.send.bind(feedback))."
+        explanation: "this is lost when passing feedback.send directly.\n\n**Fix:** Use arrow function or bind:\n```javascript\nsetTimeout(() => feedback.send());\n// or\nsetTimeout(feedback.send.bind(feedback));\n```"
       },
       {
         id: "challenge-6",
-        question: "What does this CSS selector target: [role='navigation'] > ul a:not([href^='mailto'])?",
+        question: "What does this CSS selector target?\n```css\n[role='navigation'] > ul a:not([href^='mailto'])\n```",
         options: ["All links", "Links in navigation ul that don't start with mailto:", "Only mailto links", "Nothing"],
         correctAnswer: 1,
         explanation: "Selects <a> elements inside <ul> that is a direct child of [role='navigation'], excluding links that start with 'mailto:'."
@@ -2089,7 +2089,7 @@ Challenge patterns:
       },
       {
         id: "challenge-8",
-        question: "What does this output: (function() { f(); f = function() { console.log(1); }; })(); function f() { console.log(2); } f();?",
+        question: "What does this code output?\n```javascript\n(function() {\n  f();\n  f = function() { console.log(1); };\n})();\nfunction f() { console.log(2); }\nf();\n```",
         options: ["2, 1", "1, 2", "2, 2", "1, 1"],
         correctAnswer: 0,
         explanation: "Function declarations hoist, so first f() calls the hoisted function (logs 2). Then f is reassigned, so second f() logs 1."
@@ -2106,7 +2106,7 @@ Challenge patterns:
         question: "How do you find duplicates in an unsorted array efficiently?",
         options: ["Nested loops", "Use Set to track seen values", "Sort first", "All of the above"],
         correctAnswer: 1,
-        explanation: "Using a Set to track seen values provides O(n) time complexity. Nested loops are O(n²), sorting is O(n log n)."
+        explanation: "Using a Set to track seen values provides O(n) time complexity.\n\n**Efficient solution:**\n```javascript\nconst findDuplicate = (arr) => {\n  const seen = new Set();\n  for (let num of arr) {\n    if (seen.has(num)) return num;\n    seen.add(num);\n  }\n};\n```\n\nNested loops are O(n²), sorting is O(n log n)."
       }
     ]
   }

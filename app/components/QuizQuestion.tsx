@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { QuizQuestion as QuizQuestionType } from "../data/quiz-data";
+import TextWithCode from "./TextWithCode";
 
 interface QuizQuestionProps {
   question: QuizQuestionType;
@@ -93,9 +94,12 @@ export default function QuizQuestion({
         )}
       </div>
 
-      <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-6">
-        {question.question}
-      </h2>
+      <div className="mb-6">
+        <TextWithCode
+          text={question.question}
+          className="text-lg font-semibold text-zinc-900 dark:text-zinc-50"
+        />
+      </div>
 
       <fieldset className="space-y-3" aria-label={`Question ${questionNumber}: ${question.question}`}>
         <legend className="sr-only">Answer options</legend>
@@ -156,13 +160,13 @@ export default function QuizQuestion({
           <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
             Explanation:
           </p>
-          <p className={`text-sm ${
+          <div className={`text-sm ${
             isCorrect
               ? "text-green-950 dark:text-green-50"
               : "text-zinc-800 dark:text-zinc-200"
           }`}>
-            {question.explanation}
-          </p>
+            <TextWithCode text={question.explanation || ""} />
+          </div>
         </div>
       )}
     </div>
