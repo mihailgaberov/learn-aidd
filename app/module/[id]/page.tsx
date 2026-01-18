@@ -14,7 +14,7 @@ export default function ModulePage() {
   const params = useParams();
   const router = useRouter();
   const moduleId = params.id as string;
-  const module = getModuleById(moduleId);
+  const quizModule = getModuleById(moduleId);
 
   const [state, setState] = useState<QuizState>("explainer");
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
@@ -23,18 +23,18 @@ export default function ModulePage() {
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    if (!module) {
+    if (!quizModule) {
       router.push("/");
       return;
     }
-  }, [module, router]);
+  }, [quizModule, router]);
 
-  if (!module) {
+  if (!quizModule) {
     return null;
   }
 
   const handleStartQuiz = () => {
-    const randomQuestions = getRandomQuestions(module, 10);
+    const randomQuestions = getRandomQuestions(quizModule, 10);
     setQuestions(randomQuestions);
     setAnswers(new Array(randomQuestions.length).fill(-1));
     setCurrentQuestionIndex(0);
@@ -84,7 +84,7 @@ export default function ModulePage() {
 
         <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8">
           {state === "explainer" && (
-            <ModuleExplainer module={module} onStartQuiz={handleStartQuiz} />
+            <ModuleExplainer module={quizModule} onStartQuiz={handleStartQuiz} />
           )}
 
           {state === "quiz" && questions.length > 0 && (
@@ -139,8 +139,7 @@ export default function ModulePage() {
             <QuizResults
               score={score}
               totalQuestions={questions.length}
-              moduleId={module.id}
-              moduleTitle={module.title}
+              onReviewModule={() => setState("explainer")}
             />
           )}
         </div>

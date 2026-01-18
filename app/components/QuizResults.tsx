@@ -1,20 +1,26 @@
+"use client";
+
 import Link from "next/link";
 
 interface QuizResultsProps {
   score: number;
   totalQuestions: number;
-  moduleId: string;
-  moduleTitle: string;
+  onReviewModule?: () => void;
 }
 
 export default function QuizResults({
   score,
   totalQuestions,
-  moduleId,
-  moduleTitle,
+  onReviewModule,
 }: QuizResultsProps) {
   const percentage = Math.round((score / totalQuestions) * 100);
   const isPassing = percentage >= 70;
+
+  const handleReviewModule = () => {
+    if (onReviewModule) {
+      onReviewModule();
+    }
+  };
 
   return (
     <div className="text-center space-y-6 py-8">
@@ -45,13 +51,13 @@ export default function QuizResults({
         >
           Retake Quiz
         </button>
-        <Link
-          href={`/module/${moduleId}`}
+        <button
+          onClick={handleReviewModule}
           className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 text-zinc-900 dark:text-zinc-50 font-semibold rounded-lg transition-colors"
-          aria-label="Review module content"
+          aria-label="Review module content and explainer"
         >
           Review Module
-        </Link>
+        </button>
         <Link
           href="/"
           className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900 text-zinc-900 dark:text-zinc-50 font-semibold rounded-lg transition-colors"
